@@ -1,0 +1,15 @@
+#AuthType Basic
+#AuthName "euphoria database system"
+#AuthUserfile "/home/injury-db/html/.htpasswd"
+#Require valid-user
+
+RewriteEngine On
+
+RewriteRule ^(.*(\.php|\.html|\.htm))$ index.php?url=$1 [QSA,L]
+#どのURLを入力してもindex.phpで処理するようにする
+#[QSA]はURLにクエリが付加された場合、そのクエリを有効にする
+#[L]は、この後に続くルールにこのルールを適用しない
+
+ErrorDocument 403 /403.html
+ErrorDocument 404 /404.html
+DirectoryIndex index.html index.htm index.php .ht
