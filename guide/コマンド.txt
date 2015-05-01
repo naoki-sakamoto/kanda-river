@@ -1,0 +1,44 @@
+cmd
+
+c:\pleiades\xampp\mysql\bin>mysql -V
+mysql  Ver 14.14 Distrib 5.5.25a, for Win32 (x86)
+
+>mysql test
+
+mysql> CREATE TABLE sample ( 
+  NO smallint AUTO_INCREMENT
+ ,NAME varchar(50) 
+ ,constraint sample_PKC primary key (NO)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+mysql> SHOW TABLES;
++----------------+
+| Tables_in_test |
++----------------+
+| sample         |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW COLUMNS FROM sample;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| NO    | smallint(6) | NO   | PRI | NULL    | auto_increment |
+| NAME  | varchar(50) | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.02 sec)
+
+mysql> insert into sample(no,name) values (1,'太郎');
+mysql> insert into sample(no,name) values (2,'花子');
+
+mysql> select * from sample;
++----+------+
+| NO | NAME |
++----+------+
+|  1 | 太郎 |
+|  2 | 花子 |
++----+------+
+2 rows in set (0.00 sec)
+
+
+
