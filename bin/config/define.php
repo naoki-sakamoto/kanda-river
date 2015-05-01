@@ -65,6 +65,6 @@ if (ENV == 0) {
 global $noLoginCheck;
 $noLoginCheck = array(
     "index",
-    "getResultList.sample",
+    "DB.sample",
 );
 ?>
