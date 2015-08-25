@@ -22,13 +22,14 @@ abstract class AbstractModsTest extends PHPUnit_Extensions_Database_TestCase {
    */
   protected function getConnection() {
     if ($this->_conn !== null) return $this->_conn;
+
     $this->_pdo = new PDO(
-      "mysql:host=".MASTER_DB_SERVER.";dbname=".MASTER_DB_NAME.";charset=utf8;".(defined('MASTER_DB_UNIX_SOCKET') ? "unix_socket=".MASTER_DB_UNIX_SOCKET.";" : "") ,
+      "mysql:host=".MASTER_DB_SERVER.";dbname=".MASTER_DB_NAME.";charset=utf8;".(defined('MASTER_DB_UNIX_SOCKET') ? "unix_socket=".MASTER_DB_UNIX_SOCKET.";" : ""),
       MASTER_DB_USER, MASTER_DB_PASSWORD,
       array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET `utf8`"));
     $this->_conn = $this->createDefaultDBConnection($this->_pdo, MASTER_DB_NAME);
-		return $this->_conn;
-	}
+	return $this->_conn;
+  }
 
   /*
    * <Override>

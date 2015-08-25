@@ -1,10 +1,10 @@
 <?php
 require_once(__DIR__ . "/../../vendor/autoload.php");
-require_once(__DIR__ . "/../../app/data/config/conf.php");
-require_once(__DIR__ . "/../../app/bin/config/define.php");
-require_once(__DIR__ . "/../../app/bin/mods/util.php");
-require_once(__DIR__ . "/../../app/bin/mods/putlog.php");
-require_once(__DIR__ . "/../../app/bin/mods/db.php");
+require_once(__DIR__ . "/../../data/config/conf.php");
+require_once(__DIR__ . "/../../bin/config/define.php");
+require_once(__DIR__ . "/../../bin/mods/util.php");
+require_once(__DIR__ . "/../../bin/mods/putlog.php");
+require_once(__DIR__ . "/../../bin/mods/db.php");
 
 /**
  * @backupGlobals disabled
@@ -32,7 +32,7 @@ abstract class AbstractModelTest extends PHPUnit_Extensions_Database_TestCase {
 	protected function getConnection() {
     if ($this->_conn !== null) return $this->_conn;
     $this->_pdo = new PDO(
-      "mysql:host=" . MASTER_DB_SERVER . ";dbname=" . MASTER_DB_NAME . ";charset=utf8",
+      "mysql:host=".MASTER_DB_SERVER.";dbname=".MASTER_DB_NAME.";charset=utf8;".(defined('MASTER_DB_UNIX_SOCKET') ? "unix_socket=".MASTER_DB_UNIX_SOCKET.";" : ""),
       MASTER_DB_USER, MASTER_DB_PASSWORD,
       array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET `utf8`"));
     $this->_conn = $this->createDefaultDBConnection($this->_pdo, MASTER_DB_NAME);
