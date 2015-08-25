@@ -28,7 +28,7 @@ class db extends putlog {
    * @param     string    $User   ユーザー名
    * @param     string    $Password   パスワード
    * @access    public
-   * @return    void
+   * @return    boolean   成功時true
    */
   public function connect( $Server='localhost', $DbName='test', $User='root', $Password='' ) {
     try {
@@ -42,10 +42,11 @@ class db extends putlog {
         $this->error("connect",mysqli_errno().":".mysqli_error());
         return false;
       }
-      mysqli_select_db( $this->Connection, $DbName );
+      return mysqli_select_db( $this->Connection, $DbName );
     } catch (Exception $e) {
       $this->error("connect","Server=>".$this->_Server);
       $this->error("connect",$e->getMessage());
+      return false;
     }
   }
 
@@ -55,10 +56,15 @@ class db extends putlog {
    * @since     1.0
    * @param
    * @access    public
-   * @return    void
+   * @return    boolean   成功時true
    */
   public function close() {
-    mysqli_close( $this->Connection );
+    try {
+      return mysqli_close( $this->Connection );
+    } catch (Exception $e) {
+      $this->error("close",$e->getMessage());
+      return false;
+    }
   }
 
   /**
