@@ -39,7 +39,7 @@ class db extends putlog {
       $this->Connection = @mysqli_connect( $Server, $User, $Password );
       if ($this->Connection == false) {
         $this->error("connect","Server=>".$this->_Server);
-        $this->error("connect",mysqli_errno().":".mysqli_error());
+        $this->error("connect",mysqli_connect_errno().":".mysqli_connect_error());
         return false;
       }
       return mysqli_select_db( $this->Connection, $DbName );
