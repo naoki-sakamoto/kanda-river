@@ -167,27 +167,27 @@ class db extends putlog {
   public function set_autocommit($auto=true) {
     if ($auto == true) {
       $this->autocommit = true;
-      mysql_query("SET AUTOCOMMIT=1;");//有効
+      mysqli_query($this->Connection, "SET AUTOCOMMIT=1;");//有効
     } else {
       $this->autocommit = false;
-      mysql_query("SET AUTOCOMMIT=0;");//無効
+      mysqli_query($this->Connection, "SET AUTOCOMMIT=0;");//無効
     }
 
   }
 
   public function beginTransaction() {
     if ($this->autocommit == true) return;
-    mysql_query("START TRANSACTION;");
+    mysqli_query($this->Connection, "START TRANSACTION;");
   }
 
   public function commit() {
     if ($this->autocommit == true) return;
-    mysql_query("COMMIT;");
+    mysqli_query($this->Connection, "COMMIT;");
   }
 
   public function rollback() {
     if ($this->autocommit == true) return;
-    mysql_query("ROLLBACK;");
+    mysqli_query($this->Connection, "ROLLBACK;");
   }
 
 # **********************************************************
