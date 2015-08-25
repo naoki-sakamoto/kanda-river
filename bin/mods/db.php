@@ -28,7 +28,7 @@ class db extends putlog {
    * @param     string    $User   ユーザー名
    * @param     string    $Password   パスワード
    * @access    public
-   * @return    void
+   * @return    boolean   成功時true
    */
   public function connect( $Server='localhost', $DbName='test', $User='root', $Password='' ) {
     try {
@@ -39,13 +39,14 @@ class db extends putlog {
       $this->Connection = @mysqli_connect( $Server, $User, $Password );
       if ($this->Connection == false) {
         $this->error("connect","Server=>".$this->_Server);
-        $this->error("connect",mysqli_errno().":".mysqli_error());
+        $this->error("connect",mysqli_connect_errno().":".mysqli_connect_error());
         return false;
       }
-      mysqli_select_db( $this->Connection, $DbName );
+      return mysqli_select_db( $this->Connection, $DbName );
     } catch (Exception $e) {
       $this->error("connect","Server=>".$this->_Server);
       $this->error("connect",$e->getMessage());
+      return false;
     }
   }
 
@@ -55,10 +56,15 @@ class db extends putlog {
    * @since     1.0
    * @param
    * @access    public
-   * @return    void
+   * @return    boolean   成功時true
    */
   public function close() {
-    mysqli_close( $this->Connection );
+    try {
+      return mysqli_close( $this->Connection );
+    } catch (Exception $e) {
+      $this->error("close",$e->getMessage());
+      return false;
+    }
   }
 
   /**
@@ -161,27 +167,27 @@ class db extends putlog {
   public function set_autocommit($auto=true) {
     if ($auto == true) {
       $this->autocommit = true;
-      mysql_query("SET AUTOCOMMIT=1;");//有効
+      mysqli_query($this->Connection, "SET AUTOCOMMIT=1;");//有効
     } else {
       $this->autocommit = false;
-      mysql_query("SET AUTOCOMMIT=0;");//無効
+      mysqli_query($this->Connection, "SET AUTOCOMMIT=0;");//無効
     }
 
   }
 
   public function beginTransaction() {
     if ($this->autocommit == true) return;
-    mysql_query("START TRANSACTION;");
+    mysqli_query($this->Connection, "START TRANSACTION;");
   }
 
   public function commit() {
     if ($this->autocommit == true) return;
-    mysql_query("COMMIT;");
+    mysqli_query($this->Connection, "COMMIT;");
   }
 
   public function rollback() {
     if ($this->autocommit == true) return;
-    mysql_query("ROLLBACK;");
+    mysqli_query($this->Connection, "ROLLBACK;");
   }
 
 # **********************************************************
