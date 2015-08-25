@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . "/../lib/AbstractModsTest.php");
-require_once(__DIR__ . "/../../app/bin/mods/db.php");
+require_once(__DIR__ . "/../../bin/mods/db.php");
 
 /**
  * @backupGlobals disabled
@@ -19,18 +19,9 @@ class test_db extends AbstractModsTest {
     // テーブル初期値セット
     $dataSet = $this->createArrayDataSet(array(
       'player' => array(
-        array(
-          'player_id' => 16, 'player_name' => "又吉克樹", 'nickname' => "又吉",
-          'mail_address' => "pitcher@dragons.jp", 'mail_address2' => "katsuki@dragons.jp", 'password' => "5f4dcc3b5aa765d61d8327deb882cf99",
-          'photo' => "matayoshi.jpg", 'open_range' => 0, 'browse_only' => 0, 'profile' => "", 'agreement' => 0, 'status' => 0, 'delete_flag' => 0, 'manager' => 0),
-        array(
-          'player_id' => 24, 'player_name' => "福谷浩司", 'nickname' => "福谷",
-          'mail_address' => "pitcher@dragons.jp", 'mail_address2' => "fukutani@dragons.jp", 'password' => "5f4dcc3b5aa765d61d8327deb882cf99",
-          'photo' => "yoshimi.jpg", 'open_range' => 0, 'browse_only' => 0, 'profile' => "", 'agreement' => 0, 'status' => 0, 'delete_flag' => 1, 'manager' => 0),
-        array(
-          'player_id' => 55, 'player_name' => "福田永将", 'nickname' => "福田",
-          'mail_address' => "infielder@dragons.jp", 'mail_address2' => "nobumasa@dragons.jp", 'password' => "5f4dcc3b5aa765d61d8327deb882cf99",
-          'photo' => "ohno.jpg", 'open_range' => 0, 'browse_only' => 0, 'profile' => "", 'agreement' => 0, 'status' => 0, 'delete_flag' => 0, 'manager' => 0),
+        array('id' => 16, 'password' => md5('matayoshi'), 'name' => "又吉 克樹", 'email' => "matayoshi@dragons.jp"),
+        array('id' => 22, 'password' => md5('ohno'), 'name' => "大野 雄大", 'email' => "ohno@dragons.jp"),
+        array('id' => 61, 'password' => md5('wakamatsu'), 'name' => "若松 駿太", 'email' => "wakamatsu@dragons.jp"),
       ),
     ));
     $this->setInitialDataSet($dataSet);
