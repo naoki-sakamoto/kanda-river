@@ -1,10 +1,12 @@
 <?php
+
 require_once(__DIR__ . "/../../vendor/autoload.php");
 require_once(__DIR__ . "/../../data/config/conf.php");
 require_once(__DIR__ . "/../../bin/config/define.php");
-require_once(__DIR__ . "/../../bin/mods/util.php");
-require_once(__DIR__ . "/../../bin/mods/putlog.php");
-require_once(__DIR__ . "/../../bin/mods/db.php");
+
+require_once(LIBPATH."mods/util.php");
+require_once(LIBPATH."mods/putlog.php");
+require_once(LIBPATH."mods/db.php");
 
 /**
  * @backupGlobals disabled
