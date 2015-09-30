@@ -19,9 +19,9 @@ class test_db extends AbstractModsTest {
     // テーブル初期値セット
     $dataSet = $this->createArrayDataSet(array(
       'player' => array(
-        array('id' => 16, 'password' => md5('matayoshi'), 'name' => "又吉 克樹", 'email' => "matayoshi@dragons.jp"),
-        array('id' => 22, 'password' => md5('ohno'), 'name' => "大野 雄大", 'email' => "ohno@dragons.jp"),
-        array('id' => 61, 'password' => md5('wakamatsu'), 'name' => "若松 駿太", 'email' => "wakamatsu@dragons.jp"),
+        array('id' => 16, 'password' => md5('matayoshi'), 'name' => "又吉 克樹", 'email' => "matayoshi@dragons.jp", 'position' => "pitcher"),
+        array('id' => 22, 'password' => md5('ohno'), 'name' => "大野 雄大", 'email' => "ohno@dragons.jp", 'position' => "pitcher"),
+        array('id' => 61, 'password' => md5('wakamatsu'), 'name' => "若松 駿太", 'email' => "wakamatsu@dragons.jp", 'position' => "pitcher"),
       ),
     ));
     $this->setInitialDataSet($dataSet);
@@ -127,7 +127,7 @@ class test_db extends AbstractModsTest {
   public function Query_SQL不正() {
     $this->_db->connect(MASTER_DB_SERVER, MASTER_DB_NAME, MASTER_DB_USER, MASTER_DB_PASSWORD);
     $this->_db->set_charset("utf8");
-    $result = $this->_db->Query('SELECT id,password,name,email,position FROM player');
+    $result = $this->_db->Query('SELECT id,password,name,email,position,age FROM player');
     $this->assertFalse($result);
     $this->_db->close();
   }

@@ -9,7 +9,7 @@ require_once(__DIR__ . "/../../bin/mods/putlog.php");
  */
 abstract class AbstractModsTest extends PHPUnit_Extensions_Database_TestCase {
 
-  public $putlog;
+  protected $putlog;
 
   /*
    * Initialize
@@ -82,17 +82,17 @@ abstract class AbstractModsTest extends PHPUnit_Extensions_Database_TestCase {
   protected function setBackupDataSet(array $tables) {
     $this->_backupDataSet = new PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
     foreach ($tables as $table) {
-    	$this->_backupDataSet->addTable($table);
-    	$this->_backupDataSet->getTableMetaData($table);
+      $this->_backupDataSet->addTable($table);
+      $this->_backupDataSet->getTableMetaData($table);
     }
-	}
+  }
 
   /*
    * Restore data set
    */
   private function getRestoreDataSet() {
     return $this->_backupDataSet ? $this->_backupDataSet : new PHPUnit_Extensions_Database_DataSet_DefaultDataSet();
-	}
+  }
 }
 
 function d($tag,$txt,$Loc="") {
