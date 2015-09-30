@@ -64,5 +64,17 @@ class util {
   }
  }
 
+  /**
+   *  文字列のSQLエスケープ
+   *
+   * @since     1.0
+   * @author    H.Yamada
+   * @param     string    $str   文字列
+   * @access    public
+   * @return    string
+   */
+  public function escapeString($str) {
+    return $this->db_master->escapeString($str);
+  }
+
 }
-?>

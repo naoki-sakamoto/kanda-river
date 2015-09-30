@@ -284,5 +284,16 @@ EOT;
    }
   }
 
+  /**
+   *  文字列のSQLエスケープ
+   *
+   * @since     1.0
+   * @author    H.Yamada
+   * @param     string    $str   文字列
+   * @access    public
+   * @return    string
+   */
+  public function escapeString($str) {
+    return mysqli_real_escape_string($this->Connection, $str);
+  }
 }
-?>
