@@ -1,19 +1,21 @@
 <?php
 ini_set('display_errors', 'On');
 
-define("LIBPATH", $_SERVER['HOME']."/works/kanda-river/bin/");
-define("DATAPATH", $_SERVER['HOME']."/works/kanda-river/data/");
+define("BASEPATH", $_SERVER['HOME']."/works/kanda-river/");
 
-define("ROOTPATH", $_SERVER['HOME']."/works/kanda-river/html");//ルートパス
+define("LIBPATH", BASEPATH."bin/");
+define("DATAPATH", BASEPATH."data/");
+define("ROOTPATH", BASEPATH."html");
 define('TOP_DOMAIN', '127.0.0.1:8081');
 define('TOP_URL', 'http://127.0.0.1:8081/');//トップページのURL
-//MASTER_DB
-define('MASTER_DB_SERVER', '127.0.0.1');
-define('MASTER_DB_NAME', 'kanda-river');
-define('MASTER_DB_USER', 'sayami');
-define('MASTER_DB_PASSWORD', 'sayami');
 
-// For MAMP
+// MASTER_DB
+define('MASTER_DB_SERVER', '127.0.0.1');
+define('MASTER_DB_NAME', 'sampledb');
+define('MASTER_DB_USER', 'sample');
+define('MASTER_DB_PASSWORD', 'password');
+
+// MAMPでMySQLを動作させる場合必須
 define('MASTER_DB_UNIX_SOCKET', '/Applications/MAMP/tmp/mysql/mysql.sock');
 
 define('HASH_SALT', 'vKBU49a95NR');

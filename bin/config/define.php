@@ -13,6 +13,8 @@ if (ENV == 0) {
   require_once("test.php");  // テスト環境
 } else if (ENV == 2) {
   require_once("production.php");  // 本番環境
+} else if (ENV == 9) {
+  require_once("sample.php");  // サンプル環境
 }
 
 define("WEB_MODE", "web");// WEB
