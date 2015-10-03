@@ -30,6 +30,7 @@ abstract class AbstractModelTest extends PHPUnit_Extensions_Database_TestCase {
   /*
    * <Override>
    * Get PDO connection
+   * @return PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection
    */
 	protected function getConnection() {
     if ($this->_conn !== null) return $this->_conn;
@@ -53,6 +54,7 @@ abstract class AbstractModelTest extends PHPUnit_Extensions_Database_TestCase {
   /*
    * <Override>
    * Get data set
+   * @return PHPUnit_Extensions_Database_DataSet_DefaultDataSet
    */
   protected function getDataSet() {
     if (!$this->_dataSet) {
@@ -80,7 +82,22 @@ abstract class AbstractModelTest extends PHPUnit_Extensions_Database_TestCase {
   }
 
   /*
+   * Create data set from CSV file
+   * @param  array $files (table => filepath)
+   * @param  string $filepath CSV filepath
+   * @return PHPUnit_Extensions_Database_DataSet_CsvDataSet $dataset
+   */
+  protected function createCsvDataSet(array $files) {
+    $dataSet = new PHPUnit_Extensions_Database_DataSet_CsvDataSet();
+    foreach ($files as $table => $filepath) {
+      $dataSet->addTable($table, $filepath);
+    }
+    return $dataSet;
+  }
+
+  /*
    * Set data set
+   * @param  PHPUnit_Extensions_Database_DataSet_IDataSet $dataset
    */
   protected function setInitialDataSet(PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet) {
     $this->_dataSet = $dataSet;
@@ -88,6 +105,7 @@ abstract class AbstractModelTest extends PHPUnit_Extensions_Database_TestCase {
 
   /*
    * Backup data set
+   * @param  $tables  array of tables for backup
    */
   protected function setBackupDataSet(array $tables) {
     $this->_backupDataSet = new PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
@@ -99,6 +117,7 @@ abstract class AbstractModelTest extends PHPUnit_Extensions_Database_TestCase {
 
   /*
    * Restore data set
+   * @return PHPUnit_Extensions_Database_DataSet_IDataSet
    */
   private function getRestoreDataSet() {
     return $this->_backupDataSet ? $this->_backupDataSet : new PHPUnit_Extensions_Database_DataSet_DefaultDataSet();
@@ -106,6 +125,7 @@ abstract class AbstractModelTest extends PHPUnit_Extensions_Database_TestCase {
 
   /*
    * Get master db
+   * @return db
    */
   protected function getDb() {
     if (!$this->_db) {

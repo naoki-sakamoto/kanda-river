@@ -6,7 +6,7 @@ use app\model\player;
 /**
  * @backupGlobals disabled
  */
-class test_player extends AbstractModelTest {
+class test_player_by_array extends AbstractModelTest {
 
   private $_player = null;
 
