@@ -76,6 +76,20 @@ abstract class AbstractControllerTest extends PHPUnit_Extensions_Database_TestCa
   }
 
   /*
+   * Create data set from CSV file
+   * @param  array $files (table => filepath)
+   * @param  string $filepath CSV filepath
+   * @return PHPUnit_Extensions_Database_DataSet_CsvDataSet $dataset
+   */
+  protected function createCsvDataSet(array $files) {
+    $dataSet = new PHPUnit_Extensions_Database_DataSet_CsvDataSet();
+    foreach ($files as $table => $filepath) {
+      $dataSet->addTable($table, $filepath);
+    }
+    return $dataSet;
+  }
+
+  /*
    * Set data set
    */
   protected function setInitialDataSet(PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet) {
