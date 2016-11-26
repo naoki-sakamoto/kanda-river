@@ -1,5 +1,5 @@
 <?php
-class Model extends base_module {
+class controller extends appController {
   public function logic() {
     $this->render();
   }
